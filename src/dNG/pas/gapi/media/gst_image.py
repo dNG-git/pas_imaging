@@ -36,9 +36,11 @@ http://www.direct-netware.de/redirect.py?licenses;gpl
 ----------------------------------------------------------------------------
 NOTE_END //n"""
 
-from dNG.pas.data.traced_exception import TracedException
 from dNG.pas.data.media.abstract_image import AbstractImage
 from dNG.pas.data.media.image_metadata import ImageMetadata
+from dNG.pas.runtime.io_exception import IOException
+from dNG.pas.runtime.not_implemented_exception import NotImplementedException
+from dNG.pas.runtime.value_exception import ValueException
 from .gstreamer import Gstreamer
 
 class GstImage(Gstreamer, AbstractImage):
@@ -79,7 +81,7 @@ needed.
 :since:  v0.1.00
 		"""
 
-		if (self.image == None): raise TracedException("Invalid image state")
+		if (self.image == None): raise IOException("Invalid image state")
 
 		
 	#
@@ -94,7 +96,7 @@ Return the metadata for this URL.
 		"""
 
 		_return = Gstreamer.get_metadata(self)
-		if (not isinstance(_return, ImageMetadata)): raise TracedException("Metadata do not correspond to an image")
+		if (not isinstance(_return, ImageMetadata)): raise ValueException("Metadata do not correspond to an image")
 		return _return
 	#
 
@@ -134,7 +136,7 @@ Sets the image size (and resizes it).
 :since: v0.1.00
 		"""
 
-		raise TracedException("Not implemented")
+		raise NotImplementedException()
 	#
 #
 

@@ -46,8 +46,10 @@ except ImportError:
 	from urlparse import urlsplit
 #
 
-from dNG.pas.data.traced_exception import TracedException
 from dNG.pas.data.logging.log_line import LogLine
+from dNG.pas.runtime.io_exception import IOException
+from dNG.pas.runtime.not_implemented_exception import NotImplementedException
+from dNG.pas.runtime.value_exception import ValueException
 from .abstract_image import AbstractImage
 from .pil_image_metadata import PilImageMetadata
 
@@ -247,7 +249,7 @@ needed.
 :since:  v0.1.00
 		"""
 
-		if (self.image == None): raise TracedException("Invalid image state")
+		if (self.image == None): raise IOException("Invalid image state")
 
 		
 	#
@@ -263,7 +265,7 @@ Return the metadata for this URL.
 
 		if (self.metadata == None):
 		#
-			if (self.image.mode not in _PIL_MODES): raise TracedException("Unknown PIL image mode returned")
+			if (self.image.mode not in _PIL_MODES): raise ValueException("Unknown PIL image mode returned")
 
 			exif_data = (self.image._getexif() if (hasattr(self.image, "_getexif")) else None)
 			self.metadata = PilImageMetadata("file:///{0}".format(self.file_pathname), exif_data, width = self.image.size[0], height = self.image.size[1], bpp = _PIL_MODES[self.image.mode])
@@ -335,7 +337,7 @@ Sets the image size (and resizes it).
 :since: v0.1.00
 		"""
 
-		raise TracedException("Not implemented")
+		raise NotImplementedException()
 	#
 #
 

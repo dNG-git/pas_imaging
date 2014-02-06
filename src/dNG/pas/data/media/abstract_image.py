@@ -36,7 +36,7 @@ http://www.direct-netware.de/redirect.py?licenses;gpl
 ----------------------------------------------------------------------------
 NOTE_END //n"""
 
-from dNG.pas.data.traced_exception import TracedException
+from dNG.pas.runtime.not_implemented_exception import NotImplementedException
 from .abstract import Abstract
 
 class AbstractImage(Abstract):
@@ -157,7 +157,7 @@ Sets the image size (and resizes it).
 :since: v0.1.00
 		"""
 
-		raise TracedException("Not implemented")
+		raise NotImplementedException()
 	#
 #
 
