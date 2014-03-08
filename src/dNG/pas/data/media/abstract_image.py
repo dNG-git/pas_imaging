@@ -53,6 +53,8 @@ Implementation independent image class.
              GNU General Public License 2
 	"""
 
+	# pylint: disable=unused-argument
+
 	RESIZE_CROP = 1
 	"""
 Crop image to fit

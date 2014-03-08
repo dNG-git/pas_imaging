@@ -36,6 +36,8 @@ http://www.direct-netware.de/redirect.py?licenses;gpl
 ----------------------------------------------------------------------------
 NOTE_END //n"""
 
+# pylint: disable=duplicate-key,import-error,no-name-in-module
+
 from os import path
 from PIL import Image
 
@@ -251,7 +253,7 @@ needed.
 
 		if (self.image == None): raise IOException("Invalid image state")
 
-		
+		raise NotImplementedException()
 	#
 
 	def get_metadata(self):
@@ -262,6 +264,8 @@ Return the metadata for this URL.
 :return: (object) Metadata object
 :since:  v0.1.00
 		"""
+
+		# pylint: disable=protected-access
 
 		if (self.metadata == None):
 		#
@@ -284,6 +288,8 @@ Initializes an media instance for the given URL.
 :return: (bool) True on success
 :since:  v0.1.00
 		"""
+
+		# pylint: disable=broad-except
 
 		self.image = None
 		self.metadata = None

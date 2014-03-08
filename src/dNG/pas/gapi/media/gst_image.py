@@ -83,7 +83,7 @@ needed.
 
 		if (self.image == None): raise IOException("Invalid image state")
 
-		
+		raise NotImplementedException()
 	#
 
 	def get_metadata(self):

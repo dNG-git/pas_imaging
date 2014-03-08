@@ -36,6 +36,8 @@ http://www.direct-netware.de/redirect.py?licenses;gpl
 ----------------------------------------------------------------------------
 NOTE_END //n"""
 
+# pylint: disable=unused-import
+
 try: from .pil_image import PilImage as Image
 except ImportError: from dNG.pas.gapi.media.gst_image import GstImage as Image
 
