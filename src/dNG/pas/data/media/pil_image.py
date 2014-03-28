@@ -304,7 +304,7 @@ Initializes an media instance for the given URL.
 		#
 		except Exception as handled_exception: LogLine.error(handled_exception)
 
-		return (False if (self.image == None) else True)
+		return (self.image != None)
 	#
 
 	def save(self):
