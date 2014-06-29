@@ -2,10 +2,6 @@
 ##j## BOF
 
 """
-dNG.pas.gapi.media.GstImage
-"""
-"""n// NOTE
-----------------------------------------------------------------------------
 direct PAS
 Python Application Services
 ----------------------------------------------------------------------------
@@ -33,8 +29,7 @@ http://www.direct-netware.de/redirect.py?licenses;gpl
 ----------------------------------------------------------------------------
 #echo(pasImagingVersion)#
 #echo(__FILEPATH__)#
-----------------------------------------------------------------------------
-NOTE_END //n"""
+"""
 
 from dNG.pas.data.media.abstract_image import AbstractImage
 from dNG.pas.data.media.image_metadata import ImageMetadata

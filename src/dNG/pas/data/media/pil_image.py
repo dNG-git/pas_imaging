@@ -2,10 +2,6 @@
 ##j## BOF
 
 """
-dNG.pas.data.media.PilImage
-"""
-"""n// NOTE
-----------------------------------------------------------------------------
 direct PAS
 Python Application Services
 ----------------------------------------------------------------------------
@@ -33,8 +29,7 @@ http://www.direct-netware.de/redirect.py?licenses;gpl
 ----------------------------------------------------------------------------
 #echo(pasImagingVersion)#
 #echo(__FILEPATH__)#
-----------------------------------------------------------------------------
-NOTE_END //n"""
+"""
 
 # pylint: disable=duplicate-key,import-error,no-name-in-module
 
@@ -306,7 +301,7 @@ Initializes an media instance for the given URL.
 			self.image = Image.open(file_pathname, "r")
 			self.file_pathname = file_pathname
 		#
-		except Exception as handled_exception: LogLine.error(handled_exception)
+		except Exception as handled_exception: LogLine.error(handled_exception, context = "pas_media")
 
 		return (self.image != None)
 	#
