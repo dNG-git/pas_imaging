@@ -43,7 +43,7 @@ except ImportError:
 	from urlparse import urlsplit
 #
 
-from dNG.pas.data.logging.log_line import LogLine
+from dNG.pas.runtime.exception_log_trap import ExceptionLogTrap
 from dNG.pas.runtime.io_exception import IOException
 from dNG.pas.runtime.not_implemented_exception import NotImplementedException
 from dNG.pas.runtime.value_exception import ValueException
@@ -288,20 +288,17 @@ Initializes an media instance for the given URL.
 :since:  v0.1.00
 		"""
 
-		# pylint: disable=broad-except
-
 		self.image = None
 		self.metadata = None
 
 		url_elements = urlsplit(url)
 		file_pathname = path.normpath(unquote(url_elements.path[1:]))
 
-		try:
+		with ExceptionLogTrap("pas_media"):
 		#
 			self.image = Image.open(file_pathname, "r")
 			self.file_pathname = file_pathname
 		#
-		except Exception as handled_exception: LogLine.error(handled_exception, context = "pas_media")
 
 		return (self.image != None)
 	#
