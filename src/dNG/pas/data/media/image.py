@@ -34,6 +34,14 @@ http://www.direct-netware.de/redirect.py?licenses;gpl
 # pylint: disable=unused-import
 
 try: from .pil_image import PilImage as Image
-except ImportError: from dNG.pas.gapi.media.gst_image import GstImage as Image
+except ImportError: Image = None
+
+if (Image == None):
+#
+	try: from dNG.pas.gapi.media.gst_image import GstImage as Image
+	except ImportError: pass
+#
+
+if (Image == None): from dNG.pas.runtime.not_implemented_class import NotImplementedClass as Image
 
 ##j## EOF
