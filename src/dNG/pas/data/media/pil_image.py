@@ -288,6 +288,8 @@ Initializes an media instance for the given URL.
 :since:  v0.1.00
 		"""
 
+		_return = False
+
 		self.image = None
 		self.metadata = None
 
@@ -298,9 +300,11 @@ Initializes an media instance for the given URL.
 		#
 			self.image = Image.open(file_pathname, "r")
 			self.file_pathname = file_pathname
+
+			_return = True
 		#
 
-		return (self.image != None)
+		return _return
 	#
 
 	def save(self):
