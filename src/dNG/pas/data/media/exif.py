@@ -72,6 +72,22 @@ Exif device vendor tag
 	"""
 Exif device model tag
 	"""
+	IMAGE_ORIENTATION = 0x0112
+	"""
+Exif image orientation tag
+	"""
+	IMAGE_ORIENTATION_90 = 0x8
+	"""
+Exif image orientation rotated 90°
+	"""
+	IMAGE_ORIENTATION_180 = 0x3
+	"""
+Exif image orientation rotated 180°
+	"""
+	IMAGE_ORIENTATION_270 = 0x6
+	"""
+Exif image orientation rotated 270°
+	"""
 	SOFTWARE = 0x0131
 	"""
 Exif software tag
@@ -110,13 +126,13 @@ beginning and end of the string.
 :since:  v0.1.00
 		"""
 
-		if (data != None and len(data) >= 8):
+		if (data is not None and len(data) >= 8):
 		#
 			if (Binary.str(data[:8]) == "ASCII\x00\x00\x00"): stripped_ascii = data[8:]
 			elif (re.match("ASCII\\w", Binary.str(data[:6]))): stripped_ascii = data[5:]
 			else: stripped_ascii = None
 
-			if (stripped_ascii != None):
+			if (stripped_ascii is not None):
 			#
 				if (stripped_ascii.isalnum()): data = stripped_ascii
 				else:

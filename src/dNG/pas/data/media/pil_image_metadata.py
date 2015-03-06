@@ -59,18 +59,18 @@ Constructor __init__(PilImageMetadata)
 :since: v0.1.00
 		"""
 
-		if (exif_data != None):
+		if (exif_data is not None):
 		#
 			if (Exif.ARTIST in exif_data):
 			#
 				exif_value = Exif.filter_ascii(exif_data[Exif.ARTIST])
-				if (exif_value != None and len(exif_value) > 0): kwargs['artist'] = exif_value
+				if (exif_value is not None and len(exif_value) > 0): kwargs['artist'] = exif_value
 			#
 
 			if (Exif.COPYRIGHT in exif_data):
 			#
 				exif_value = Exif.filter_ascii(exif_data[Exif.COPYRIGHT])
-				if (exif_value != None and len(exif_value) > 0): kwargs['copyright'] = exif_value
+				if (exif_value is not None and len(exif_value) > 0): kwargs['copyright'] = exif_value
 			#
 
 			"""
@@ -82,11 +82,11 @@ Select description from Exif.DESCRIPTION or Exif.USER_COMMENT tags.
 			if (Exif.DESCRIPTION in exif_data):
 			#
 				exif_value = Exif.filter_ascii(exif_data[Exif.DESCRIPTION])
-				if (exif_value != None and len(exif_value) == 0): exif_value = None
+				if (exif_value is not None and len(exif_value) == 0): exif_value = None
 			#
 
-			if (exif_value == None and Exif.USER_COMMENT in exif_data): exif_value = Exif.filter_typed_string(exif_data[Exif.USER_COMMENT])
-			if (exif_value != None and len(exif_value) > 0): kwargs['description'] = exif_value
+			if (exif_value is None and Exif.USER_COMMENT in exif_data): exif_value = Exif.filter_typed_string(exif_data[Exif.USER_COMMENT])
+			if (exif_value is not None and len(exif_value) > 0): kwargs['description'] = exif_value
 
 			"""
 Select producer from Exif.DEVICE_* or Exif.SOFTWARE tags.
@@ -105,11 +105,11 @@ Select producer from Exif.DEVICE_* or Exif.SOFTWARE tags.
 					else: exif_value = exif_model_value
 				#
 
-				if (exif_value != None and len(exif_value) == 0): exif_value = None
+				if (exif_value is not None and len(exif_value) == 0): exif_value = None
 			#
 
-			if (exif_value == None and Exif.SOFTWARE in exif_data): exif_value = Exif.filter_ascii(exif_data[Exif.SOFTWARE])
-			if (exif_value != None and len(exif_value) > 0): kwargs['producer'] = exif_value
+			if (exif_value is None and Exif.SOFTWARE in exif_data): exif_value = Exif.filter_ascii(exif_data[Exif.SOFTWARE])
+			if (exif_value is not None and len(exif_value) > 0): kwargs['producer'] = exif_value
 		#
 
 		ImageMetadata.__init__(self, url, **kwargs)

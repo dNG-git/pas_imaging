@@ -64,19 +64,19 @@ Constructor __init__(GstImage)
 		Gstreamer.__init__(self)
 	#
 
-	def copy(self, file_pathname):
+	def copy(self, file_path_name):
 	#
 		"""
 Creates a copy of the image converting it to match the file extension if
 needed.
 
-:param file_pathname: Image file path and name
+:param file_path_name: Image file path and name
 
 :return: (bool) True on success
 :since:  v0.1.00
 		"""
 
-		if (self.image == None): raise IOException("Invalid image state")
+		if (self.image is None): raise IOException("Invalid image state")
 
 		raise NotImplementedException()
 	#
