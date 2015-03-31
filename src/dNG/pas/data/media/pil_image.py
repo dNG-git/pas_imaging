@@ -447,7 +447,7 @@ Saves the media instance using the defined constraints.
 
 		exif_data = (image._getexif() if (hasattr(image, "_getexif")) else None)
 
-		if (exif_data is not None):
+		if (exif_data is not None and Exif.IMAGE_ORIENTATION in exif_data):
 		#
 			image_orientation = InputFilter.filter_int(exif_data[Exif.IMAGE_ORIENTATION])
 
