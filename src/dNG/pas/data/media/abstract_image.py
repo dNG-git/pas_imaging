@@ -199,15 +199,15 @@ Initializes a new image instance.
 		raise NotImplementedException()
 	#
 
-	def read(self, _bytes = 0):
+	def read(self, n = 0):
 	#
 		"""
 Reads data from the opened image.
 
-:param _bytes: How many bytes to read from the current position (0 means
-               until EOF)
+:param n: How many bytes to read from the current position (0 means until
+          EOF)
 
-:return: (mixed) Data; False on error
+:return: (bytes) Data; None if EOF
 :since:  v0.1.00
 		"""
 
@@ -242,11 +242,11 @@ Saves the image using the defined constraints.
 	def seek(self, offset):
 	#
 		"""
-Seek to a given offset.
+python.org: Change the stream position to the given byte offset.
 
 :param offset: Seek to the given offset
 
-:return: (bool) True on success
+:return: (int) Return the new absolute position.
 :since:  v0.1.00
 		"""
 

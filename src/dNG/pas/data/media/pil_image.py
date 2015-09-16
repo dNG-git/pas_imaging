@@ -410,22 +410,22 @@ Initializes an media instance for the given URL.
 		return _return
 	#
 
-	def read(self, _bytes = 0):
+	def read(self, n = 0):
 	#
 		"""
 Reads data from the opened image.
 
-:param _bytes: How many bytes to read from the current position (0 means
-               until EOF)
+:param n: How many bytes to read from the current position (0 means until
+          EOF)
 
-:return: (mixed) Data; False on error
+:return: (bytes) Data; None if EOF
 :since:  v0.1.02
 		"""
 
 		if (self.image is None): raise IOException("Invalid image state")
 
 		image_file = self.get_image_file()
-		return (image_file.read() if (_bytes < 1) else image_file.read(_bytes))
+		return (image_file.read() if (n < 1) else image_file.read(n))
 	#
 
 	def save(self):
@@ -506,11 +506,11 @@ Saves the media instance using the defined constraints.
 	def seek(self, offset):
 	#
 		"""
-Seek to a given offset.
+python.org: Change the stream position to the given byte offset.
 
 :param offset: Seek to the given offset
 
-:return: (bool) True on success
+:return: (int) Return the new absolute position.
 :since:  v0.1.02
 		"""
 
@@ -565,9 +565,9 @@ Sets the source image.
 	def tell(self):
 	#
 		"""
-Returns the current offset.
+python.org: Return the current stream position as an opaque number.
 
-:return: (int) Offset; False on error
+:return: (int) Stream position
 :since:  v0.1.02
 		"""
 
