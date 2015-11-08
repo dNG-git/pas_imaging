@@ -286,7 +286,7 @@ Cached metadata instance
 	def __del__(self):
 	#
 		"""
-Destructor __del__(File)
+Destructor __del__(PilImage)
 
 :since: v0.1.00
 		"""
