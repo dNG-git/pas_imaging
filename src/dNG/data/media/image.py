@@ -38,10 +38,10 @@ except ImportError: Image = None
 
 if (Image is None):
 #
-	try: from dNG.pas.gapi.media.gst_image import GstImage as Image
+	try: from dNG.gapi.media.gst_image import GstImage as Image
 	except ImportError: pass
 #
 
-if (Image is None): from dNG.pas.runtime.not_implemented_class import NotImplementedClass as Image
+if (Image is None): from dNG.runtime.not_implemented_class import NotImplementedClass as Image
 
 ##j## EOF

@@ -39,11 +39,11 @@ class PilImageMetadata(ImageMetadata):
 	"""
 This class provides access to PIL metadata.
 
-:author:     direct Netware Group
+:author:     direct Netware Group et al.
 :copyright:  (C) direct Netware Group - All rights reserved
 :package:    pas
 :subpackage: imaging
-:since:      v0.1.00
+:since:      v0.2.00
 :license:    https://www.direct-netware.de/redirect?licenses;gpl
              GNU General Public License 2
 	"""
@@ -56,7 +56,7 @@ Constructor __init__(PilImageMetadata)
 :param url: Metadata source URL
 :param exif_data: Image Exif data as dict
 
-:since: v0.1.00
+:since: v0.2.00
 		"""
 
 		if (exif_data is not None):

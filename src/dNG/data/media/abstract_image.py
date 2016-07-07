@@ -31,7 +31,8 @@ https://www.direct-netware.de/redirect?licenses;gpl
 #echo(__FILEPATH__)#
 """
 
-from dNG.pas.runtime.not_implemented_exception import NotImplementedException
+from dNG.runtime.not_implemented_exception import NotImplementedException
+
 from .abstract import Abstract
 
 class AbstractImage(Abstract):
@@ -39,11 +40,11 @@ class AbstractImage(Abstract):
 	"""
 Implementation independent image class.
 
-:author:     direct Netware Group
+:author:     direct Netware Group et al.
 :copyright:  direct Netware Group - All rights reserved
 :package:    pas
 :subpackage: imaging
-:since:      v0.1.00
+:since:      v0.2.00
 :license:    https://www.direct-netware.de/redirect?licenses;gpl
              GNU General Public License 2
 	"""
@@ -88,7 +89,7 @@ Scale image and add borders to fit
 		"""
 Constructor __init__(AbstractImage)
 
-:since: v0.1.00
+:since: v0.2.00
 		"""
 
 		Abstract.__init__(self)
@@ -137,6 +138,7 @@ Unsaved image width
 Calculates the transformed image size under the defined resize mode.
 
 :return: (tuple) Tuple with width and height in pixel
+:since:  v0.2.00
 		"""
 
 		image_metadata = self.get_metadata()
@@ -193,7 +195,7 @@ Initializes a new image instance.
 
 :param file_path_name: File path and name or None for a temporary file.
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		raise NotImplementedException()
@@ -208,7 +210,7 @@ Reads data from the opened image.
           EOF)
 
 :return: (bytes) Data; None if EOF
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		raise NotImplementedException()
@@ -222,7 +224,7 @@ Initializes an media instance for the given URL.
 :param url: URL
 
 :return: (bool) True on success
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		return False
@@ -233,7 +235,7 @@ Initializes an media instance for the given URL.
 		"""
 Saves the image using the defined constraints.
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		raise NotImplementedException()
@@ -247,7 +249,7 @@ python.org: Change the stream position to the given byte offset.
 :param offset: Seek to the given offset
 
 :return: (int) Return the new absolute position.
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		raise NotImplementedException()
@@ -260,7 +262,7 @@ Sets the image colormap of the unsaved image.
 
 :param colormap: Image colormap
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		self.unsaved_colormap = colormap
@@ -273,7 +275,7 @@ Sets the mime type of the unsaved image.
 
 :param mimetype: Mime type
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		self.unsaved_mimetype = mimetype
@@ -286,7 +288,7 @@ Sets the resize mode.
 
 :param mode: Resize mode
 
-:since: v0.1.00
+:since: v0.2.00
 		"""
 
 		self.resize_mode = mode
@@ -300,7 +302,7 @@ Sets the image size of the unsaved image.
 :param width: Image width
 :param height: Image height
 
-:since: v0.1.00
+:since: v0.2.00
 		"""
 
 		self.unsaved_width = width
@@ -314,7 +316,7 @@ Sets the source image.
 
 :param image: Image instance
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		raise NotImplementedException()
@@ -326,7 +328,7 @@ Sets the source image.
 Returns the current offset.
 
 :return: (int) Offset; False on error
-:since:  v0.1.02
+:since:  v0.2.00
 		"""
 
 		raise NotImplementedException()
@@ -338,7 +340,7 @@ Returns the current offset.
 Transforms the image using the defined settings.
 
 :return: (bool) True on success
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		return False
@@ -355,7 +357,7 @@ is not supported None is returned.
 :param depth: Image depth
 
 :return: (int) Colormap constant; None if not supported
-:since:  v0.1.02
+:since:  v0.2.00
 		"""
 
 		return None
@@ -371,7 +373,7 @@ Returns true if the given colormap is supported for the mime type.
 :param colormap: Colormap constant to check
 
 :return: (bool) True if supported
-:since:  v0.1.02
+:since:  v0.2.00
 		"""
 
 		return False

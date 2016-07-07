@@ -34,19 +34,19 @@ https://www.direct-netware.de/redirect?licenses;gpl
 from codecs import getdecoder
 import re
 
-from dNG.pas.data.binary import Binary
-from dNG.pas.data.text.input_filter import InputFilter
+from dNG.data.binary import Binary
+from dNG.data.text.input_filter import InputFilter
 
 class Exif(object):
 #
 	"""
 This class contains static Exif parsing helper functions.
 
-:author:     direct Netware Group
+:author:     direct Netware Group et al.
 :copyright:  direct Netware Group - All rights reserved
 :package:    pas
 :subpackage: imaging
-:since:      v0.1.00
+:since:      v0.2.00
 :license:    https://www.direct-netware.de/redirect?licenses;gpl
              GNU General Public License 2
 	"""
@@ -107,7 +107,7 @@ beginning and end of the string.
 :param data: Raw data
 
 :return: (str) Filtered data
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		return InputFilter.filter_control_chars(data).strip()
@@ -123,7 +123,7 @@ beginning and end of the string.
 :param data: Raw data
 
 :return: (str) Filtered data
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		if (data is not None and len(data) >= 8):

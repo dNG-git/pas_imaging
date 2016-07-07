@@ -45,11 +45,12 @@ except ImportError:
 #
 
 from dNG.data.file import File
-from dNG.pas.data.text.input_filter import InputFilter
-from dNG.pas.runtime.exception_log_trap import ExceptionLogTrap
-from dNG.pas.runtime.io_exception import IOException
-from dNG.pas.runtime.type_exception import TypeException
-from dNG.pas.runtime.value_exception import ValueException
+from dNG.data.text.input_filter import InputFilter
+from dNG.runtime.exception_log_trap import ExceptionLogTrap
+from dNG.runtime.io_exception import IOException
+from dNG.runtime.type_exception import TypeException
+from dNG.runtime.value_exception import ValueException
+
 from .abstract_image import AbstractImage
 from .exif import Exif
 from .pil_image_metadata import PilImageMetadata
@@ -59,11 +60,11 @@ class PilImage(AbstractImage):
 	"""
 PIL implementation of the image class.
 
-:author:     direct Netware Group
+:author:     direct Netware Group et al.
 :copyright:  direct Netware Group - All rights reserved
 :package:    pas
 :subpackage: imaging
-:since:      v0.1.00
+:since:      v0.2.00
 :license:    https://www.direct-netware.de/redirect?licenses;gpl
              GNU General Public License 2
 	"""
@@ -266,7 +267,7 @@ Dictionary with PIL format mappings
 		"""
 Constructor __init__(PilImage)
 
-:since: v0.1.00
+:since: v0.2.00
 		"""
 
 		AbstractImage.__init__(self)
@@ -288,7 +289,7 @@ Cached metadata instance
 		"""
 Destructor __del__(PilImage)
 
-:since: v0.1.00
+:since: v0.2.00
 		"""
 
 		if (self.image_file is not None): self.image_file.close()
@@ -298,6 +299,8 @@ Destructor __del__(PilImage)
 	#
 		"""
 Returns the original or transformed image file instance.
+
+:since: v0.2.00
 		"""
 
 		return (self.image_file
@@ -312,7 +315,7 @@ Returns the original or transformed image file instance.
 Return the metadata for this URL.
 
 :return: (object) Metadata object
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		# pylint: disable=protected-access
@@ -358,7 +361,7 @@ Initializes a new image instance.
 
 :param file_path_name: File path and name or None for a temporary file.
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		if (file_path_name is None): self.image_file = TemporaryFile("w+b")
@@ -384,7 +387,7 @@ Initializes an media instance for the given URL.
 :param url: URL
 
 :return: (bool) True on success
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		_return = False
@@ -419,7 +422,7 @@ Reads data from the opened image.
           EOF)
 
 :return: (bytes) Data; None if EOF
-:since:  v0.1.02
+:since:  v0.2.00
 		"""
 
 		if (self.image is None): raise IOException("Invalid image state")
@@ -433,7 +436,7 @@ Reads data from the opened image.
 		"""
 Saves the media instance using the defined constraints.
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		if (self.unsaved_source is None): raise ValueException("Source image is not defined")
@@ -511,7 +514,7 @@ python.org: Change the stream position to the given byte offset.
 :param offset: Seek to the given offset
 
 :return: (int) Return the new absolute position.
-:since:  v0.1.02
+:since:  v0.2.00
 		"""
 
 		if (self.image is None): raise IOException("Invalid image state")
@@ -527,7 +530,7 @@ Sets the image colormap of the unsaved image.
 
 :param colormap: Image colormap
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		if (not PilImage.is_colormap_supported(self.unsaved_mimetype, colormap)): raise ValueException("Colormap given is not supported by PilImage for the mime type '{0}'".format(self.unsaved_mimetype))
@@ -541,7 +544,7 @@ Sets the mime type of the unsaved image.
 
 :param mimetype: Mime type
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		if (not PilImage.is_mimetype_supported(mimetype)): raise ValueException("Unsupported unsaved image mime type '{0}'".format(mimetype))
@@ -555,7 +558,7 @@ Sets the source image.
 
 :param image: Image instance
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		if (not isinstance(image, Image.Image)): raise TypeException("Given image source is invalid")
@@ -568,7 +571,7 @@ Sets the source image.
 python.org: Return the current stream position as an opaque number.
 
 :return: (int) Stream position
-:since:  v0.1.02
+:since:  v0.2.00
 		"""
 
 		if (self.image is None): raise IOException("Invalid image state")
@@ -583,7 +586,7 @@ python.org: Return the current stream position as an opaque number.
 Transforms the image using the defined settings.
 
 :return: (bool) True on success
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		pil_format = PilImage.get_pil_format(self.unsaved_mimetype)
@@ -620,7 +623,7 @@ is not supported None is returned.
 :param depth: Image depth
 
 :return: (int) Colormap constant; None if not supported
-:since:  v0.1.02
+:since:  v0.2.00
 		"""
 
 		_return = None
@@ -650,7 +653,7 @@ Returns the PIL colormap definition for the given mime type and colormap.
 :param colormap: Colormap constant
 
 :return: (dict) PIL colormap definition
-:since:  v0.1.02
+:since:  v0.2.00
 		"""
 
 		_return = PilImage.PIL_FORMATS.get(mimetype)
@@ -669,7 +672,7 @@ Returns the PIL colormap definition for the given mime type and colormap.
 :param colormap: Colormap constant
 
 :return: (dict) PIL colormap definition
-:since:  v0.1.02
+:since:  v0.2.00
 		"""
 
 		if (not PilImage.is_mimetype_supported(mimetype)): raise ValueException("Mime type '{0}' given is not supported by PilImage".format(mimetype))
@@ -698,7 +701,7 @@ Returns true if the given colormap is supported for the mime type.
 :param colormap: Colormap constant to check
 
 :return: (bool) True if supported
-:since:  v0.1.02
+:since:  v0.2.00
 		"""
 
 		_return = True
@@ -718,7 +721,7 @@ Returns true if the given mime type is supported.
 :param mimetype: Mime type to check
 
 :return: (bool) True if supported
-:since:  v0.1.02
+:since:  v0.2.00
 		"""
 
 		return (mimetype in PilImage.PIL_FORMATS)

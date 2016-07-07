@@ -31,11 +31,12 @@ https://www.direct-netware.de/redirect?licenses;gpl
 #echo(__FILEPATH__)#
 """
 
-from dNG.pas.data.media.abstract_image import AbstractImage
-from dNG.pas.data.media.image_metadata import ImageMetadata
-from dNG.pas.runtime.io_exception import IOException
-from dNG.pas.runtime.not_implemented_exception import NotImplementedException
-from dNG.pas.runtime.value_exception import ValueException
+from dNG.data.media.abstract_image import AbstractImage
+from dNG.data.media.image_metadata import ImageMetadata
+from dNG.runtime.io_exception import IOException
+from dNG.runtime.not_implemented_exception import NotImplementedException
+from dNG.runtime.value_exception import ValueException
+
 from .gstreamer import Gstreamer
 
 class GstImage(Gstreamer, AbstractImage):
@@ -43,11 +44,11 @@ class GstImage(Gstreamer, AbstractImage):
 	"""
 GStreamer implementation of the image class.
 
-:author:     direct Netware Group
+:author:     direct Netware Group et al.
 :copyright:  direct Netware Group - All rights reserved
 :package:    pas
 :subpackage: imaging
-:since:      v0.1.00
+:since:      v0.2.00
 :license:    https://www.direct-netware.de/redirect?licenses;gpl
              GNU General Public License 2
 	"""
@@ -57,7 +58,7 @@ GStreamer implementation of the image class.
 		"""
 Constructor __init__(GstImage)
 
-:since: v0.1.00
+:since: v0.2.00
 		"""
 
 		AbstractImage.__init__(self)
@@ -73,7 +74,7 @@ needed.
 :param file_path_name: Image file path and name
 
 :return: (bool) True on success
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		if (self.image is None): raise IOException("Invalid image state")
@@ -87,7 +88,7 @@ needed.
 Return the metadata for this URL.
 
 :return: (object) Metadata object
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		_return = Gstreamer.get_metadata(self)
@@ -101,7 +102,7 @@ Return the metadata for this URL.
 Saves the image if changed.
 
 :return: (bool) True on success
-:since:  v0.1.00
+:since:  v0.2.00
 		"""
 
 		return False
@@ -114,7 +115,7 @@ Sets the resize mode.
 
 :param mode: Resize mode
 
-:since: v0.1.00
+:since: v0.2.00
 		"""
 
 		self.resize_mode = mode
@@ -128,7 +129,7 @@ Sets the image size (and resizes it).
 :param width: Image width
 :param height: Image height
 
-:since: v0.1.00
+:since: v0.2.00
 		"""
 
 		raise NotImplementedException()
