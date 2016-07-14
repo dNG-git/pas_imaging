@@ -445,6 +445,7 @@ Saves the media instance using the defined constraints.
 		pil_mode = PilImage.get_pil_colormap_definition(self.unsaved_mimetype, self.unsaved_colormap)['pil_mode']
 
 		image = self.unsaved_source
+		image_size = ( self.unsaved_source.size[0], self.unsaved_source.size[1] )
 		is_size_rotated = False
 		unsaved_size = ( self.unsaved_width, self.unsaved_height )
 
@@ -456,41 +457,57 @@ Saves the media instance using the defined constraints.
 
 			if (image_orientation == Exif.IMAGE_ORIENTATION_90):
 			#
-				image = image.rotate(90)
+				image = image.rotate(90, expand = True)
 				is_size_rotated = True
 			#
 			elif (image_orientation == Exif.IMAGE_ORIENTATION_180): image = image.rotate(180)
 			elif (image_orientation == Exif.IMAGE_ORIENTATION_270):
 			#
-				image = image.rotate(270)
+				image = image.rotate(270, expand = True)
 				is_size_rotated = True
 			#
 
-			if (is_size_rotated):
-			#
-				unsaved_size = ( self.unsaved_height, self.unsaved_width )
-
-				self.unsaved_width = unsaved_size[0]
-				self.unsaved_height = unsaved_size[1]
-			#
+			if (is_size_rotated): image_size = ( self.unsaved_source.size[1], self.unsaved_source.size[0] )
 		#
 
-		if (self.unsaved_source.size != unsaved_size):
+		if (image_size != unsaved_size):
 		#
-			if (is_size_rotated): ( resize_height, resize_width ) = self._calculate_transformed_size()
-			else: ( resize_width, resize_height ) = self._calculate_transformed_size()
+			( transformed_width, transformed_height ) = self._calculate_transformed_size(image_size)
 
-			image = image.resize(( resize_width, resize_height ), Image.ANTIALIAS)
+			if (image_size != ( transformed_width, transformed_height )):
+			#
+				image = image.resize(( transformed_width, transformed_height ), (Image.ANTIALIAS | Image.LANCZOS))
+			#
 
-			if (resize_width != self.unsaved_width or resize_height != self.unsaved_height):
+			if (self.resize_mode == PilImage.RESIZE_CROP):
+			#
+				half_height = (self.unsaved_height / 2)
+				half_width = (self.unsaved_width / 2)
+				transformed_x_center = (transformed_width / 2)
+				transformed_y_middle = (transformed_height / 2)
+
+				image = image.transform(unsaved_size,
+				                        Image.EXTENT,
+				                        ( int(round(transformed_x_center - half_width)),
+				                          int(round(transformed_y_middle - half_height)),
+				                          int(round(transformed_x_center + half_width)),
+				                          int(round(transformed_y_middle + half_height))
+				                        )
+				                       )
+
+				transformed_width = unsaved_size[0]
+				transformed_height = unsaved_size[1]
+			#
+
+			if (transformed_width != self.unsaved_width or transformed_height != self.unsaved_height):
 			#
 				if (self.resize_mode == PilImage.RESIZE_SCALED_FIT):
 				#
 					sized_image = Image.new(self.unsaved_source.mode, unsaved_size)
-					base_x = round((self.unsaved_width - resize_width) / 2)
-					base_y = round((self.unsaved_height - resize_height) / 2)
+					base_x = round((self.unsaved_width - transformed_width) / 2)
+					base_y = round((self.unsaved_height - transformed_height) / 2)
 
-					sized_image.paste(image, (base_x, base_y ))
+					sized_image.paste(image, ( base_x, base_y ))
 					image = sized_image
 				#
 				else: image = ImageOps.fit(image, unsaved_size)
