@@ -50,6 +50,7 @@ from dNG.runtime.exception_log_trap import ExceptionLogTrap
 from dNG.runtime.io_exception import IOException
 from dNG.runtime.type_exception import TypeException
 from dNG.runtime.value_exception import ValueException
+from dNG.vfs.implementation import Implementation
 
 from .abstract_image import AbstractImage
 from .exif import Exif
@@ -395,11 +396,23 @@ Initializes an media instance for the given URL.
 		self.image = None
 		self.metadata = None
 
-		url_elements = urlsplit(url)
-		file_path_name = path.normpath(unquote(url_elements.path[1:]))
-
 		with ExceptionLogTrap("pas_media"):
 		#
+			url_elements = urlsplit(url)
+
+			if (url_elements.scheme == "file"): file_path_name = path.normpath(unquote(url_elements.path[1:]))
+			else:
+			#
+				vfs_object = Implementation.load_vfs_url(url, True)
+
+				try:
+				#
+					if (not vfs_object.is_supported("filesystem_path_name")): raise IOException("Source image with URL scheme '{0}' is not supported".format(url_elements.scheme))
+					file_path_name = vfs_object.get_filesystem_path_name()
+				#
+				finally: vfs_object.close()
+			#
+
 			self.image_file = File()
 			self.image_file.open(file_path_name, True, "rb")
 
