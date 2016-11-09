@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-##j## BOF
 
 """
 direct PAS
@@ -35,8 +34,7 @@ from .exif import Exif
 from .image_metadata import ImageMetadata
 
 class PilImageMetadata(ImageMetadata):
-#
-	"""
+    """
 This class provides access to PIL metadata.
 
 :author:     direct Netware Group et al.
@@ -46,74 +44,65 @@ This class provides access to PIL metadata.
 :since:      v0.2.00
 :license:    https://www.direct-netware.de/redirect?licenses;gpl
              GNU General Public License 2
-	"""
+    """
 
-	def __init__(self, url, exif_data, **kwargs):
-	#
-		"""
+    def __init__(self, url, exif_data, **kwargs):
+        """
 Constructor __init__(PilImageMetadata)
 
 :param url: Metadata source URL
 :param exif_data: Image Exif data as dict
 
 :since: v0.2.00
-		"""
+        """
 
-		if (exif_data is not None):
-		#
-			if (Exif.ARTIST in exif_data):
-			#
-				exif_value = Exif.filter_ascii(exif_data[Exif.ARTIST])
-				if (exif_value is not None and len(exif_value) > 0): kwargs['artist'] = exif_value
-			#
+        if (exif_data is not None):
+            if (Exif.ARTIST in exif_data):
+                exif_value = Exif.filter_ascii(exif_data[Exif.ARTIST])
+                if (exif_value is not None and len(exif_value) > 0): kwargs['artist'] = exif_value
+            #
 
-			if (Exif.COPYRIGHT in exif_data):
-			#
-				exif_value = Exif.filter_ascii(exif_data[Exif.COPYRIGHT])
-				if (exif_value is not None and len(exif_value) > 0): kwargs['copyright'] = exif_value
-			#
+            if (Exif.COPYRIGHT in exif_data):
+                exif_value = Exif.filter_ascii(exif_data[Exif.COPYRIGHT])
+                if (exif_value is not None and len(exif_value) > 0): kwargs['copyright'] = exif_value
+            #
 
-			"""
+            """
 Select description from Exif.DESCRIPTION or Exif.USER_COMMENT tags.
-			"""
+            """
 
-			exif_value = None
+            exif_value = None
 
-			if (Exif.DESCRIPTION in exif_data):
-			#
-				exif_value = Exif.filter_ascii(exif_data[Exif.DESCRIPTION])
-				if (exif_value is not None and len(exif_value) == 0): exif_value = None
-			#
+            if (Exif.DESCRIPTION in exif_data):
+                exif_value = Exif.filter_ascii(exif_data[Exif.DESCRIPTION])
+                if (exif_value is not None and len(exif_value) == 0): exif_value = None
+            #
 
-			if (exif_value is None and Exif.USER_COMMENT in exif_data): exif_value = Exif.filter_typed_string(exif_data[Exif.USER_COMMENT])
-			if (exif_value is not None and len(exif_value) > 0): kwargs['description'] = exif_value
+            if (exif_value is None and Exif.USER_COMMENT in exif_data): exif_value = Exif.filter_typed_string(exif_data[Exif.USER_COMMENT])
+            if (exif_value is not None and len(exif_value) > 0): kwargs['description'] = exif_value
 
-			"""
+            """
 Select producer from Exif.DEVICE_* or Exif.SOFTWARE tags.
-			"""
+            """
 
-			if (Exif.DEVICE_VENDOR in exif_data or Exif.DEVICE_MODEL in exif_data):
-			#
-				exif_value = (Exif.filter_ascii(exif_data[Exif.DEVICE_VENDOR]) if (Exif.DEVICE_VENDOR in exif_data) else "")
-				exif_model_value = (Exif.filter_ascii(exif_data[Exif.DEVICE_MODEL]) if (Exif.DEVICE_MODEL in exif_data) else "")
+            if (Exif.DEVICE_VENDOR in exif_data or Exif.DEVICE_MODEL in exif_data):
+                exif_value = (Exif.filter_ascii(exif_data[Exif.DEVICE_VENDOR]) if (Exif.DEVICE_VENDOR in exif_data) else "")
+                exif_model_value = (Exif.filter_ascii(exif_data[Exif.DEVICE_MODEL]) if (Exif.DEVICE_MODEL in exif_data) else "")
 
-				if (len(exif_model_value) > 0):
-				#
-					exif_model_value = Exif.filter_ascii(exif_data[Exif.DEVICE_MODEL])
+                if (len(exif_model_value) > 0):
+                    exif_model_value = Exif.filter_ascii(exif_data[Exif.DEVICE_MODEL])
 
-					if (len(exif_value) > 0): exif_value += " - {0}".format(exif_model_value)
-					else: exif_value = exif_model_value
-				#
+                    if (len(exif_value) > 0): exif_value += " - {0}".format(exif_model_value)
+                    else: exif_value = exif_model_value
+                #
 
-				if (exif_value is not None and len(exif_value) == 0): exif_value = None
-			#
+                if (exif_value is not None and len(exif_value) == 0): exif_value = None
+            #
 
-			if (exif_value is None and Exif.SOFTWARE in exif_data): exif_value = Exif.filter_ascii(exif_data[Exif.SOFTWARE])
-			if (exif_value is not None and len(exif_value) > 0): kwargs['producer'] = exif_value
-		#
+            if (exif_value is None and Exif.SOFTWARE in exif_data): exif_value = Exif.filter_ascii(exif_data[Exif.SOFTWARE])
+            if (exif_value is not None and len(exif_value) > 0): kwargs['producer'] = exif_value
+        #
 
-		ImageMetadata.__init__(self, url, **kwargs)
-	#
+        ImageMetadata.__init__(self, url, **kwargs)
+    #
 #
-
-##j## EOF
